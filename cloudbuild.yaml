@@ -3,9 +3,8 @@ steps:
     args: ['build', '-t', '${_IMAGE}:latest', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: '/bin/bash -c'
-    args: |
-      docker tag ${_IMAGE}:latest ${_IMAGE}:${TAG_NAME:-${COMMIT_SHA}}
+    entrypoint: '/bin/bash'
+    args: ['-c', 'docker tag ${_IMAGE}:latest ${_IMAGE}:${TAG_NAME:-${COMMIT_SHA}}']
     env:
       - TAG_NAME=${TAG_NAME}
       - COMMIT_SHA=${COMMIT_SHA}
