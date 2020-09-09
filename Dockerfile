@@ -1,6 +1,7 @@
 FROM alpine:latest
 
 RUN apk --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ add shellinabox
+RUN apk --no-cache add mysql-client
 
 EXPOSE 4200
 
