@@ -1,16 +1,8 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${_IMAGE}:latest', '.']
-
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: '/bin/bash'
-    args: ['-c', 'docker tag ${_IMAGE}:latest ${_IMAGE}:${TAG_NAME:-${SHORT_SHA}}']
-    env:
-      - TAG_NAME=${TAG_NAME}
-      - SHORT_SHA=${SHORT_SHA}
+    args: ['build', '-t', '${_IMAGE}', '.']
 
 images: ['${_IMAGE}']
 
 substitutions:
-  _IMAGE: gcr.io/${PROJECT_ID}/shellinabox
-  _TAG: ${TAG_NAME:-${SHORT_SHA}}
+  _IMAGE: 'gcr.io/${PROJECT_ID}/${REPO_NAME}:${TAG_NAME:-${SHORT_SHA}}'
